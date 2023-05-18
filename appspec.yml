@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+# file_exists_behavior: OVERWRITE
+permissions:
+  - object: /var/www/html
+    owner: www-data
+    group: www-data
+hooks:
+  BeforeInstall:
+    - location: devops/install_dependencies.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: devops/deploy_laravel.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: devops/start_server.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: devops/stop_server.sh
+      timeout: 300
+      runas: root
