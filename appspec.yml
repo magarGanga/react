@@ -13,15 +13,15 @@ hooks:
     - location: devops/install_dependencies.sh
       timeout: 300
       runas: root
-  AfterInstall:
-    - location: devops/deploy_laravel.sh
-      timeout: 300
-      runas: root
-  ApplicationStart:
-    - location: devops/start_server.sh
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: devops/stop_server.sh
-      timeout: 300
-      runas: root
+  # AfterInstall:
+  #   - location: devops/deploy_laravel.sh
+  #     timeout: 300
+  #     runas: root
+  # ApplicationStart:
+  #   - location: devops/start_server.sh
+  #     timeout: 300
+  #     runas: root
+  # ApplicationStop:
+  #   - location: devops/stop_server.sh
+  #     timeout: 300
+  #     runas: root
