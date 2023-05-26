@@ -6,17 +6,32 @@ phases:
       nodejs: 18
    
     commands:
-        # install npm
-        - npm install
+      - echo Getting started...
        
+  pre-build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+      - aws --version
+  
   build:
     commands:
-        # run build script
-        - npm run-script build
+      - echo Build started on `date`
+      - echo first test code
+      - echo Compiling code
+      - npm run build 
+      - echo build finished, new moving to s3
+
+  post_build:
+    commands:
+      - echo Build Completed on `date`
+      - ls
+      - pwd
+      - aws s3 sync build/ s3://react-final-test20223 --acl public-read
      
-artifacts:
-  # include all files required to run application
-  # notably excluded is node_modules, as this will cause overwrite error on deploy
-  files:
-    - "*"
-    - "**/*"
+# artifacts:
+#   # include all files required to run application
+#   # notably excluded is node_modules, as this will cause overwrite error on deploy
+#   files:
+#     - "build/*"
+#     - "build/**/*"
